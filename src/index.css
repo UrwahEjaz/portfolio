@@ -155,26 +155,38 @@ section {
   background-clip: text;
 }
 
-.hero-name-row {
+.hero-inner {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  margin-bottom: 0;
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+.hero-photo {
+  flex-shrink: 0;
 }
 
 .hero-avatar {
-  width: 90px;
-  height: 90px;
+  width: 220px;
+  height: 220px;
   border-radius: 50%;
   object-fit: cover;
-  object-position: center top;
-  border: 2px solid transparent;
-  background: var(--gradient);
+  object-position: 80% 30%;
   outline: 2px solid rgba(99, 102, 241, 0.4);
-  outline-offset: 3px;
-  flex-shrink: 0;
-  box-shadow: 0 0 24px var(--accent-glow);
+  outline-offset: 4px;
+  box-shadow: 0 0 32px var(--accent-glow);
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .hero-inner {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+  }
+  .hero-avatar {
+    width: 150px;
+    height: 150px;
+  }
 }
 
 .hero-title {

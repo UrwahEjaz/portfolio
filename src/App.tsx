@@ -115,12 +115,10 @@ export default function App() {
       <section id="hero">
         <div className="hero-bg" />
         <div className="container">
+          <div className="hero-inner">
           <div className="hero-content">
             <p className="hero-greeting">Hello, I'm</p>
-            <div className="hero-name-row">
-              <h1 className="hero-name">Urwah Ejaz</h1>
-              <img src="/profile.png" alt="Urwah Ejaz" className="hero-avatar" />
-            </div>
+            <h1 className="hero-name">Urwah Ejaz</h1>
             <p className="hero-title">AI Engineer · Computer Vision · LLMs · MLOps</p>
             <p className="hero-desc">
               Final-year AI Engineer with 1+ year of production experience building real-world AI systems
@@ -145,6 +143,10 @@ export default function App() {
                 +92 318 854 3547
               </a>
             </div>
+          </div>
+          <div className="hero-photo">
+            <img src="/profile.png" alt="Urwah Ejaz" className="hero-avatar" />
+          </div>
           </div>
         </div>
       </section>
