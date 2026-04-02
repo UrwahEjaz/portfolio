@@ -1,30 +1,12 @@
+import { useEffect } from 'react'
 import './index.css'
 
 const skills = [
-  {
-    label: 'Languages',
-    tags: ['Python', 'JavaScript', 'C++', 'SQL'],
-  },
-  {
-    label: 'AI / ML',
-    tags: ['Computer Vision', 'LLMs', 'NLP', 'CNNs', 'Transformers', 'Transfer Learning', 'Object Detection', 'Time Series', 'Recommendation Systems'],
-  },
-  {
-    label: 'Frameworks & Libraries',
-    tags: ['PyTorch', 'TensorFlow', 'Scikit-learn', 'HuggingFace Transformers', 'OpenCV', 'FastAPI', 'React'],
-  },
-  {
-    label: 'Generative AI',
-    tags: ['LLM Application Dev', 'RAG Pipelines', 'Voice AI Agents', 'Prompt Engineering', 'AI Interviewer Bot'],
-  },
-  {
-    label: 'MLOps',
-    tags: ['GitHub Actions', 'DVC', 'Docker', 'Multi-GPU Training'],
-  },
-  {
-    label: 'Cloud & Data',
-    tags: ['AWS S3', 'PostgreSQL', 'SQLite', 'MSSQL', 'COCO / XML / JSON Annotation', 'Hyperparameter Optimization'],
-  },
+  { label: 'Languages', tags: ['Python', 'JavaScript', 'C++', 'SQL'] },
+  { label: 'AI + ML', tags: ['Computer Vision', 'LLMs', 'NLP', 'CNNs', 'Transformers', 'Time Series'] },
+  { label: 'Frameworks', tags: ['PyTorch', 'TensorFlow', 'Scikit-learn', 'HuggingFace', 'OpenCV', 'FastAPI', 'React'] },
+  { label: 'Generative AI', tags: ['RAG Pipelines', 'Voice AI Agents', 'Prompt Engineering', 'AI Interviewer Bot'] },
+  { label: 'MLOps + Infra', tags: ['GitHub Actions', 'DVC', 'Docker', 'AWS S3', 'Multi-GPU Training'] },
 ]
 
 const experience = [
@@ -55,16 +37,16 @@ const experience = [
 const projects = [
   {
     title: 'CoFound AI',
-    badge: 'Final Year Project',
+    badge: 'Flagship',
     featured: true,
-    desc: 'End-to-end AI platform helping entrepreneurs convert raw ideas into investor-ready proposals. Five modules: Genesis (idea-to-proposal), Journey Map (RAG-based roadmapping), Capital Connect (investor matchmaking via sentence embeddings), Pitch Forge (AI pitch deck + email generation), and Project Pilot (task management).',
+    desc: 'End-to-end AI platform helping entrepreneurs convert ideas into investor-ready plans. Includes RAG roadmapping, investor matchmaking, and AI pitch generation.',
     tags: ['React.js', 'FastAPI', 'PostgreSQL', 'RAG', 'LLMs', 'Random Forest', 'SQLAlchemy'],
   },
   {
     title: 'Factory Copilot (vFuseAct)',
     badge: 'Production',
     featured: true,
-    desc: 'Lightweight streaming action segmentation network with dual ResNet backbones (spatial + temporal), Smart Gated Fusion, and dual MemoryTCN heads for hierarchical action recognition. Deployed on edge devices across varying factory conditions — eliminated assembly rework and boosted efficiency by 35%.',
+    desc: 'Streaming action segmentation for edge wearables with dual ResNet + MemoryTCN architecture. Reduced assembly rework and improved factory efficiency by 35%.',
     tags: ['PyTorch', 'ResNet', 'MemoryTCN', 'Edge Deployment', 'Action Segmentation'],
   },
   {
@@ -97,177 +79,156 @@ const certifications = [
 ]
 
 export default function App() {
+  useEffect(() => {
+    const elements = document.querySelectorAll<HTMLElement>('.reveal')
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible')
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.16 }
+    )
+
+    elements.forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <>
-      {/* Navbar */}
-      <nav className="navbar">
-        <span className="navbar-logo">Urwah Ejaz</span>
-        <ul className="navbar-links">
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#education">Education</a></li>
-          <li><a href="mailto:urwahejaz@gmail.com">Contact</a></li>
-        </ul>
-      </nav>
+    <div className="site-shell">
+      <header className="topbar">
+        <a className="wordmark" href="#home">URWAH EJAZ</a>
+        <nav aria-label="Primary" className="main-nav">
+          <a href="#projects">Projects</a>
+          <a href="#experience">Experience</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </header>
 
-      {/* Hero */}
-      <section id="hero">
-        <div className="hero-bg" />
-        <div className="container">
-          <div className="hero-inner">
-          <div className="hero-content">
-            <p className="hero-greeting">Hello, I'm</p>
-            <h1 className="hero-name">Urwah Ejaz</h1>
-            <p className="hero-title">AI Engineer · Computer Vision · LLMs · MLOps</p>
-            <p className="hero-desc">
-              Final-year AI Engineer with 1+ year of production experience building real-world AI systems
-              from streaming action segmentation on factory floors to multi-source analytics dashboards and
-              end-to-end LLM-powered platforms. I turn research into shipped products.
-            </p>
-            <div className="hero-actions">
-              <a href="#projects" className="btn-primary">View My Work</a>
-              <a href="mailto:urwahejaz@gmail.com" className="btn-outline">Get In Touch</a>
-            </div>
-            <div className="hero-socials">
-              <a href="https://linkedin.com/in/urwahejaz" target="_blank" rel="noreferrer" className="social-link">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-                linkedin.com/in/urwahejaz
-              </a>
-              <a href="mailto:urwahejaz@gmail.com" className="social-link">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                urwahejaz@gmail.com
-              </a>
-              <a href="tel:+923188543547" className="social-link">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
-                +92 318 854 3547
-              </a>
+      <main id="home">
+        <section className="hero">
+          <div className="noise" />
+          <div className="hero-grid">
+            <aside className="hero-panel reveal">
+              <p className="panel-label">Based in Islamabad</p>
+              <p className="panel-text">I design and ship intelligent products where deep learning meets real user impact.</p>
+              <img src="/profile.png" alt="Portrait of Urwah Ejaz" className="portrait" />
+            </aside>
+
+            <div className="hero-copy">
+              <p className="kicker">AI Engineer / Computer Vision / LLM Systems</p>
+              <h1 className="headline">
+                I build
+                <span>production AI</span>
+                that people can feel.
+              </h1>
+              <p className="lead">
+                From factory-floor action intelligence to multi-source forecasting dashboards, I turn advanced models into reliable products.
+              </p>
+              <div className="cta-row">
+                <a className="btn-solid" href="#projects">See selected work</a>
+                <a className="btn-ghost" href="mailto:urwahejaz@gmail.com">Start a conversation</a>
+              </div>
             </div>
           </div>
-          <div className="hero-photo">
-            <img src="/profile.png" alt="Urwah Ejaz" className="hero-avatar" />
-          </div>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Skills */}
-      <section id="skills">
-        <div className="container">
-          <p className="section-label">What I work with</p>
-          <h2 className="section-title">Technical Skills</h2>
-          <div className="section-divider" />
-          <div className="skills-grid">
-            {skills.map((s) => (
-              <div className="skill-card" key={s.label}>
-                <p className="skill-card-label">{s.label}</p>
-                <div className="skill-tags">
-                  {s.tags.map((t) => (
-                    <span className="skill-tag" key={t}>{t}</span>
+        <section id="projects" className="reveal section">
+          <div className="section-head">
+            <p className="kicker">Selected Projects</p>
+            <h2>Work that shipped.</h2>
+          </div>
+          <div className="project-layout">
+            {projects.map((p) => (
+              <article className={`project ${p.featured ? 'is-featured' : ''}`} key={p.title}>
+                <p className="badge">{p.badge}</p>
+                <h3>{p.title}</h3>
+                <p>{p.desc}</p>
+                <div className="chips">
+                  {p.tags.map((t) => (
+                    <span key={t}>{t}</span>
                   ))}
                 </div>
-              </div>
+              </article>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Experience */}
-      <section id="experience">
-        <div className="container">
-          <p className="section-label">Where I've worked</p>
-          <h2 className="section-title">Experience</h2>
-          <div className="section-divider" />
+        <section id="experience" className="reveal section">
+          <div className="section-head">
+            <p className="kicker">Experience</p>
+            <h2>Built in real environments.</h2>
+          </div>
           <div className="timeline">
             {experience.map((exp) => (
-              <div className="timeline-item" key={exp.role + exp.company}>
-                <div className="timeline-dot" />
-                <div className="exp-card">
-                  <div className="exp-header">
-                    <p className="exp-role">{exp.role}</p>
-                    <p className="exp-company">{exp.company}</p>
-                    <span className="exp-period">{exp.period}</span>
-                  </div>
-                  <ul className="exp-bullets">
-                    {exp.bullets.map((b, i) => (
-                      <li key={i}>{b}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+              <article className="entry" key={exp.role + exp.company}>
+                <header>
+                  <p className="role">{exp.role}</p>
+                  <p className="meta">{exp.company}</p>
+                  <p className="period">{exp.period}</p>
+                </header>
+                <ul>
+                  {exp.bullets.map((b, i) => (
+                    <li key={i}>{b}</li>
+                  ))}
+                </ul>
+              </article>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Projects */}
-      <section id="projects">
-        <div className="container">
-          <p className="section-label">What I've built</p>
-          <h2 className="section-title">Projects</h2>
-          <div className="section-divider" />
-          <div className="projects-grid">
-            {projects.map((p) => (
-              <div className={`project-card${p.featured ? ' featured' : ''}`} key={p.title}>
-                <span className="project-badge">{p.badge}</span>
-                <p className="project-title">{p.title}</p>
-                <p className="project-desc">{p.desc}</p>
-                <div className="project-tags">
-                  {p.tags.map((t) => (
-                    <span className="project-tag" key={t}>{t}</span>
+        <section className="reveal section">
+          <div className="section-head">
+            <p className="kicker">Capabilities</p>
+            <h2>My technical stack.</h2>
+          </div>
+          <div className="skills">
+            {skills.map((s) => (
+              <article className="skill" key={s.label}>
+                <h3>{s.label}</h3>
+                <div className="chips">
+                  {s.tags.map((t) => (
+                    <span key={t}>{t}</span>
                   ))}
                 </div>
-              </div>
+              </article>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Education & Certs */}
-      <section id="education">
-        <div className="container">
-          <p className="section-label">Background</p>
-          <h2 className="section-title">Education & Certifications</h2>
-          <div className="section-divider" />
-          <div className="edu-certs-grid">
-            <div className="edu-card">
-              <p className="edu-degree">Bachelor of Science in Artificial Intelligence</p>
-              <p className="edu-school">National University of Computer and Emerging Sciences (FAST-NUCES), Islamabad</p>
-              <p className="edu-period">Aug 2022 – 2026 (Expected)</p>
-            </div>
-            <div className="cert-card">
-              <p className="section-label" style={{ marginBottom: '1rem' }}>Certifications</p>
-              <ul className="cert-list">
-                {certifications.map((c) => (
-                  <li key={c.name}>
-                    <span className="cert-dot" />
-                    <div>
-                      <div>{c.name}</div>
-                      <div className="cert-issuer">{c.issuer}</div>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
+        <section className="reveal section school-grid">
+          <article className="school-card">
+            <p className="kicker">Education</p>
+            <h2>Bachelor of Science in Artificial Intelligence</h2>
+            <p>FAST-NUCES, Islamabad</p>
+            <p>Aug 2022 - 2026 (Expected)</p>
+          </article>
+          <article className="school-card">
+            <p className="kicker">Certifications</p>
+            <ul className="certs">
+              {certifications.map((c) => (
+                <li key={c.name}>
+                  <span>{c.name}</span>
+                  <small>{c.issuer}</small>
+                </li>
+              ))}
+            </ul>
+          </article>
+        </section>
+      </main>
 
-      {/* Footer */}
-      <footer>
-        <div className="container">
-          <p className="footer-name">Urwah Ejaz</p>
-          <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-            AI Engineer · Islamabad, Pakistan
-          </p>
-          <div className="footer-links">
-            <a href="mailto:urwahejaz@gmail.com">Email</a>
-            <a href="https://linkedin.com/in/urwahejaz" target="_blank" rel="noreferrer">LinkedIn</a>
-            <a href="tel:+923188543547">Phone</a>
-          </div>
-          <p className="footer-copy">© {new Date().getFullYear()} Urwah Ejaz. All rights reserved.</p>
+      <footer id="contact" className="footer reveal">
+        <p className="footer-title">Let us build something undeniable.</p>
+        <div className="footer-links">
+          <a href="mailto:urwahejaz@gmail.com">urwahejaz@gmail.com</a>
+          <a href="https://linkedin.com/in/urwahejaz" target="_blank" rel="noreferrer">linkedin.com/in/urwahejaz</a>
+          <a href="tel:+923188543547">+92 318 854 3547</a>
         </div>
+        <p className="footer-copy">© {new Date().getFullYear()} Urwah Ejaz</p>
       </footer>
-    </>
+    </div>
   )
 }
