@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import './index.css'
 
 const skills = [
@@ -15,8 +15,8 @@ const experience = [
     company: 'VisionRD · CEMTECH · NSTP · NUST — Islamabad',
     period: 'June 2025 – Present',
     bullets: [
-      'Worked on Factory Copilot — an AI-powered wearable using vFuseAct (dual ResNet backbones, Smart Gated Fusion, dual MemoryTCN heads) for real-time assembly error detection on edge devices; boosted factory efficiency by 35%.',
-      'Built and shipped Intelligence Hub — a full-stack multi-source analytics dashboard (DMS, WhatsApp/WATI, PakWheels/Reddit) with ML-driven dealership revenue forecasting, real-time KPI tracking, and AI-generated insights.',
+      'Worked on Factory Copilot an AI-powered wearable using vFuseAct (dual ResNet backbones, Smart Gated Fusion, dual MemoryTCN heads) for real-time assembly error detection on edge devices; boosted factory efficiency by 35%.',
+      'Built and shipped Intelligence Hub a full-stack multi-source analytics dashboard (DMS, WhatsApp/WATI, PakWheels/Reddit) with ML-driven dealership revenue forecasting, real-time KPI tracking, and AI-generated insights.',
       'Led MLOps pipeline development with GitHub Actions and DVC for automated model deployment and reproducible experimentation.',
       'Trained and evaluated deep learning / computer vision models on multi-GPU systems, reducing inference latency for production-grade OCR and industrial AI products.',
       'Managed large-scale model checkpoints and datasets on AWS S3; collaborated with DevOps teams to integrate AI models via APIs.',
@@ -73,57 +73,20 @@ const projects = [
 ]
 
 const cofoundModules = [
-  {
-    name: 'Genesis',
-    detail: 'Converts raw text, voice, or PDFs into structured business plans and startup blueprints.',
-    tool: 'Custom ML + LLM + PyPDF2',
-  },
-  {
-    name: 'Journey Map',
-    detail: 'Generates milestone roadmaps with strategy modes and validated timeline logic.',
-    tool: 'RAG + Multi-layer LLM + JSON Schema/Pydantic',
-  },
-  {
-    name: 'Capital Connect',
-    detail: 'Matches startups with relevant investors using smart filtering and profile ranking.',
-    tool: 'Investor Retrieval + Matching Layer',
-  },
-  {
-    name: 'Pitch Forge',
-    detail: 'Creates pitch decks, startup logos, and personalized cold outreach emails.',
-    tool: 'LLM Content Generation',
-  },
-  {
-    name: 'Project Pilot',
-    detail: 'Turns strategy into execution with task assignment, tracking, and team workflows.',
-    tool: 'Workflow Engine + Progress Analytics',
-  },
+  { name: 'Genesis', detail: 'Converts raw text or PDFs into structured business plans via custom ML + LLM.' },
+  { name: 'Journey Map', detail: 'RAG-powered roadmap generation with 4-layer LLM and Pydantic-validated output.' },
+  { name: 'Capital Connect', detail: 'Matches startups to investors using sentence embeddings and smart filtering.' },
+  { name: 'Pitch Forge', detail: 'Generates pitch decks, brand assets, and personalised outreach emails.' },
+  { name: 'Project Pilot', detail: 'AI-driven task breakdown, team assignment, and execution tracking.' },
 ]
 
-const cofoundFlow = [
-  'Founder Input',
-  'Genesis Intelligence',
-  'Module Orchestration',
-  'Investor-Ready Outputs',
-]
-
-const cofoundTech = [
-  'React.js',
-  'FastAPI',
-  'Python',
-  'SQLAlchemy',
-  'PostgreSQL',
-  'RAG Pipeline',
-  'LLM APIs',
-  'PyPDF2',
-  'Pydantic',
-]
+const cofoundTech = ['React.js', 'FastAPI', 'PostgreSQL', 'SQLAlchemy', 'RAG Pipeline', 'PyPDF2', 'Pydantic']
 
 const cofoundStats = [
   { value: '5', label: 'AI Modules' },
-  { value: '4', label: 'Layer LLM Pipeline' },
-  { value: 'RAG + ML', label: 'Core Intelligence' },
+  { value: '4-Layer', label: 'LLM Pipeline' },
   { value: '3', label: 'User Roles' },
+  { value: 'RAG + ML', label: 'Core Intelligence' },
 ]
 
 const certifications = [
@@ -133,7 +96,6 @@ const certifications = [
 ]
 
 export default function App() {
-  const [activeAlgorithm, setActiveAlgorithm] = useState<'genesis' | 'journey'>('genesis')
   const cofoundProject = projects.find((p) => p.title === 'CoFound AI')
   const otherProjects = projects.filter((p) => p.title !== 'CoFound AI')
 
@@ -202,105 +164,53 @@ export default function App() {
 
           {cofoundProject && (
             <article className="cofound-flagship">
-              <div className="cofound-head">
-                <p className="cofound-label">Flagship Work</p>
-                <p className="badge">{cofoundProject.badge}</p>
-              </div>
-              <h3 className="cofound-title">{cofoundProject.title}</h3>
-              <p className="cofound-desc">{cofoundProject.desc}</p>
+              <div className="cf-body">
+                <div className="cf-left">
+                  <p className="cf-eyebrow">Flagship Work · Final Year Project</p>
+                  <h3 className="cf-title">{cofoundProject.title}</h3>
+                  <p className="cf-desc">
+                    End-to-end AI platform that takes a founder's raw idea and delivers a structured
+                    business plan, strategic roadmap, investor matches, pitch deck, and project
+                    execution suite all powered by a custom ML + RAG + multi-layer LLM architecture.
+                  </p>
 
-              <div className="cofound-modules">
-                {cofoundModules.map((module) => (
-                  <article className="cofound-module" key={module.name}>
-                    <h4>{module.name}</h4>
-                    <p>{module.detail}</p>
-                    <span>{module.tool}</span>
-                  </article>
-                ))}
-              </div>
+                  <div className="cf-stats">
+                    {cofoundStats.map((s) => (
+                      <div className="cf-stat" key={s.label}>
+                        <strong>{s.value}</strong>
+                        <span>{s.label}</span>
+                      </div>
+                    ))}
+                  </div>
 
-              <article className="cofound-architecture" aria-label="CoFound AI system architecture">
-                <p className="cofound-subtitle">System Architecture</p>
-                <div className="arch-row">
-                  <div className="arch-node">React Frontend</div>
-                  <span className="arch-arrow">→</span>
-                  <div className="arch-node">FastAPI Backend</div>
-                  <span className="arch-arrow">→</span>
-                  <div className="arch-node is-db">PostgreSQL</div>
-                </div>
-                <div className="arch-modules">
-                  <p className="arch-modules-title">Backend Module Layer</p>
-                  <div className="arch-module-grid">
-                    {cofoundModules.map((module) => (
-                      <span key={module.name}>{module.name}</span>
+                  <div className="cf-tech">
+                    {cofoundTech.map((t) => (
+                      <span key={t}>{t}</span>
                     ))}
                   </div>
                 </div>
-              </article>
 
-              <div className="cofound-tech-row" aria-label="CoFound AI technology stack">
-                {cofoundTech.map((tech) => (
-                  <span key={tech}>{tech}</span>
-                ))}
-              </div>
-
-              <div className="cofound-stats" aria-label="CoFound AI key stats">
-                {cofoundStats.map((stat) => (
-                  <div className="cofound-stat" key={stat.label}>
-                    <strong>{stat.value}</strong>
-                    <small>{stat.label}</small>
-                  </div>
-                ))}
-              </div>
-
-              <article className="cofound-algorithm" aria-label="CoFound AI algorithm highlight">
-                <div className="algo-tabs">
-                  <button
-                    type="button"
-                    className={activeAlgorithm === 'genesis' ? 'active' : ''}
-                    onClick={() => setActiveAlgorithm('genesis')}
-                  >
-                    Genesis Pipeline
-                  </button>
-                  <button
-                    type="button"
-                    className={activeAlgorithm === 'journey' ? 'active' : ''}
-                    onClick={() => setActiveAlgorithm('journey')}
-                  >
-                    Journey Map Pipeline
-                  </button>
+                <div className="cf-right">
+                  <p className="cf-modules-label">5 AI Modules</p>
+                  <ol className="cf-modules">
+                    {cofoundModules.map((m) => (
+                      <li key={m.name}>
+                        <strong>{m.name}</strong>
+                        <span>{m.detail}</span>
+                      </li>
+                    ))}
+                  </ol>
                 </div>
+              </div>
 
-                {activeAlgorithm === 'genesis' ? (
-                  <div className="algo-flow">
-                    <span>Raw Text/PDF</span>
-                    <i>→</i>
-                    <span>Custom ML</span>
-                    <i>→</i>
-                    <span>Business Blueprint</span>
-                    <i>→</i>
-                    <span>LLM Plan</span>
-                  </div>
-                ) : (
-                  <div className="algo-flow">
-                    <span>Input</span>
-                    <i>→</i>
-                    <span>RAG Retrieval</span>
-                    <i>→</i>
-                    <span>4-Layer LLM</span>
-                    <i>→</i>
-                    <span>Validated Roadmap</span>
-                  </div>
-                )}
-              </article>
-
-              <div className="cofound-flow" aria-label="CoFound AI architecture flow">
-                {cofoundFlow.map((step, index) => (
-                  <div className="flow-step" key={step}>
-                    <span>{step}</span>
-                    {index < cofoundFlow.length - 1 && <i aria-hidden="true">→</i>}
-                  </div>
-                ))}
+              <div className="cf-pipeline">
+                <span>Founder Input</span>
+                <i />
+                <span>Genesis · Journey Map</span>
+                <i />
+                <span>Capital Connect · Pitch Forge</span>
+                <i />
+                <span>Project Pilot · Outputs</span>
               </div>
             </article>
           )}
