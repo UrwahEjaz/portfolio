@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import './index.css'
 
 const skills = [
@@ -72,6 +72,60 @@ const projects = [
   },
 ]
 
+const cofoundModules = [
+  {
+    name: 'Genesis',
+    detail: 'Converts raw text, voice, or PDFs into structured business plans and startup blueprints.',
+    tool: 'Custom ML + LLM + PyPDF2',
+  },
+  {
+    name: 'Journey Map',
+    detail: 'Generates milestone roadmaps with strategy modes and validated timeline logic.',
+    tool: 'RAG + Multi-layer LLM + JSON Schema/Pydantic',
+  },
+  {
+    name: 'Capital Connect',
+    detail: 'Matches startups with relevant investors using smart filtering and profile ranking.',
+    tool: 'Investor Retrieval + Matching Layer',
+  },
+  {
+    name: 'Pitch Forge',
+    detail: 'Creates pitch decks, startup logos, and personalized cold outreach emails.',
+    tool: 'LLM Content Generation',
+  },
+  {
+    name: 'Project Pilot',
+    detail: 'Turns strategy into execution with task assignment, tracking, and team workflows.',
+    tool: 'Workflow Engine + Progress Analytics',
+  },
+]
+
+const cofoundFlow = [
+  'Founder Input',
+  'Genesis Intelligence',
+  'Module Orchestration',
+  'Investor-Ready Outputs',
+]
+
+const cofoundTech = [
+  'React.js',
+  'FastAPI',
+  'Python',
+  'SQLAlchemy',
+  'PostgreSQL',
+  'RAG Pipeline',
+  'LLM APIs',
+  'PyPDF2',
+  'Pydantic',
+]
+
+const cofoundStats = [
+  { value: '5', label: 'AI Modules' },
+  { value: '4', label: 'Layer LLM Pipeline' },
+  { value: 'RAG + ML', label: 'Core Intelligence' },
+  { value: '3', label: 'User Roles' },
+]
+
 const certifications = [
   { name: 'Complete A.I. & Machine Learning, Data Science Bootcamp', issuer: 'Udemy' },
   { name: 'Deep Learning A-Z 2025: Neural Networks, AI & ChatGPT', issuer: 'Udemy' },
@@ -79,6 +133,10 @@ const certifications = [
 ]
 
 export default function App() {
+  const [activeAlgorithm, setActiveAlgorithm] = useState<'genesis' | 'journey'>('genesis')
+  const cofoundProject = projects.find((p) => p.title === 'CoFound AI')
+  const otherProjects = projects.filter((p) => p.title !== 'CoFound AI')
+
   useEffect(() => {
     const elements = document.querySelectorAll<HTMLElement>('.reveal')
     const observer = new IntersectionObserver(
@@ -141,8 +199,114 @@ export default function App() {
             <p className="kicker">Selected Projects</p>
             <h2>Work that shipped.</h2>
           </div>
+
+          {cofoundProject && (
+            <article className="cofound-flagship">
+              <div className="cofound-head">
+                <p className="cofound-label">Flagship Work</p>
+                <p className="badge">{cofoundProject.badge}</p>
+              </div>
+              <h3 className="cofound-title">{cofoundProject.title}</h3>
+              <p className="cofound-desc">{cofoundProject.desc}</p>
+
+              <div className="cofound-modules">
+                {cofoundModules.map((module) => (
+                  <article className="cofound-module" key={module.name}>
+                    <h4>{module.name}</h4>
+                    <p>{module.detail}</p>
+                    <span>{module.tool}</span>
+                  </article>
+                ))}
+              </div>
+
+              <article className="cofound-architecture" aria-label="CoFound AI system architecture">
+                <p className="cofound-subtitle">System Architecture</p>
+                <div className="arch-row">
+                  <div className="arch-node">React Frontend</div>
+                  <span className="arch-arrow">→</span>
+                  <div className="arch-node">FastAPI Backend</div>
+                  <span className="arch-arrow">→</span>
+                  <div className="arch-node is-db">PostgreSQL</div>
+                </div>
+                <div className="arch-modules">
+                  <p className="arch-modules-title">Backend Module Layer</p>
+                  <div className="arch-module-grid">
+                    {cofoundModules.map((module) => (
+                      <span key={module.name}>{module.name}</span>
+                    ))}
+                  </div>
+                </div>
+              </article>
+
+              <div className="cofound-tech-row" aria-label="CoFound AI technology stack">
+                {cofoundTech.map((tech) => (
+                  <span key={tech}>{tech}</span>
+                ))}
+              </div>
+
+              <div className="cofound-stats" aria-label="CoFound AI key stats">
+                {cofoundStats.map((stat) => (
+                  <div className="cofound-stat" key={stat.label}>
+                    <strong>{stat.value}</strong>
+                    <small>{stat.label}</small>
+                  </div>
+                ))}
+              </div>
+
+              <article className="cofound-algorithm" aria-label="CoFound AI algorithm highlight">
+                <div className="algo-tabs">
+                  <button
+                    type="button"
+                    className={activeAlgorithm === 'genesis' ? 'active' : ''}
+                    onClick={() => setActiveAlgorithm('genesis')}
+                  >
+                    Genesis Pipeline
+                  </button>
+                  <button
+                    type="button"
+                    className={activeAlgorithm === 'journey' ? 'active' : ''}
+                    onClick={() => setActiveAlgorithm('journey')}
+                  >
+                    Journey Map Pipeline
+                  </button>
+                </div>
+
+                {activeAlgorithm === 'genesis' ? (
+                  <div className="algo-flow">
+                    <span>Raw Text/PDF</span>
+                    <i>→</i>
+                    <span>Custom ML</span>
+                    <i>→</i>
+                    <span>Business Blueprint</span>
+                    <i>→</i>
+                    <span>LLM Plan</span>
+                  </div>
+                ) : (
+                  <div className="algo-flow">
+                    <span>Input</span>
+                    <i>→</i>
+                    <span>RAG Retrieval</span>
+                    <i>→</i>
+                    <span>4-Layer LLM</span>
+                    <i>→</i>
+                    <span>Validated Roadmap</span>
+                  </div>
+                )}
+              </article>
+
+              <div className="cofound-flow" aria-label="CoFound AI architecture flow">
+                {cofoundFlow.map((step, index) => (
+                  <div className="flow-step" key={step}>
+                    <span>{step}</span>
+                    {index < cofoundFlow.length - 1 && <i aria-hidden="true">→</i>}
+                  </div>
+                ))}
+              </div>
+            </article>
+          )}
+
           <div className="project-layout">
-            {projects.map((p) => (
+            {otherProjects.map((p) => (
               <article className={`project ${p.featured ? 'is-featured' : ''}`} key={p.title}>
                 <p className="badge">{p.badge}</p>
                 <h3>{p.title}</h3>
